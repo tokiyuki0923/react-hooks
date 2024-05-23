@@ -1,7 +1,7 @@
 import './App.css';
-import { useState, useContext, useReducer, useMemo, useCallback} from 'react';
+import { useState, useContext, useReducer, useMemo,} from 'react';
 import Pikachu from './main';
-import "./SomeChild"
+import useLocalStorage from './useLocalStorage';
 
 
 const reducer =(state,action) =>{
@@ -22,6 +22,8 @@ function App() {
   const [count1,setCount1]=useState(0);
   const [count2,setCount2]=useState(0);
 
+  const [age,setAge] =useLocalStorage("age",24)
+
   const handleClick =()=>{
     setCount(count +1);
   }
@@ -36,14 +38,14 @@ function App() {
     return count2 * count2;
     },[count2]);
 
-    const [counter,setCounter] =useCallback(0);
+    // const [counter,setCounter] =useCallback(0);
 
     // const showCount =()=>{
     //   alert("これは重い処理です")
     // }
-    const showCount = useCallback(()=>{
-      alert("これは重い処理です")
-    },[counter]);
+    // const showCount = useCallback(()=>{
+    //   alert("これは重い処理です")
+    // },[counter]);
     
 
   return (
@@ -67,8 +69,12 @@ function App() {
       <button onClick={()=>setCount1(count1+1)}>＋</button>
       <button onClick={()=>setCount2(count2+1)}>＋</button>
       <hr />
-      <h1>useCallBack</h1>
-      <SomeChild showCount={showCount} />
+      {/* <h1>useCallBack</h1>
+      <SomeChild showCount={showCount} /> */}
+      <hr />
+      <h1>カスタムフック</h1>
+      <p>{age}</p>
+      <button onClick={()=> setAge(80)}>年齢をセット</button>
     </div>
   )
 }
