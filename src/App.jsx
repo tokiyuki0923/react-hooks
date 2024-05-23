@@ -18,22 +18,22 @@ function App() {
   const[count, setCount] =useState(0);
   const poke = useContext(Pikachu);
   const [state,dispatch] = useReducer(reducer,0);
-
+  const [count1,setCount1]=useState(0);
+  const [count2,setCount2]=useState(0);
 
   const handleClick =()=>{
     setCount(count +1);
   }
 
-  const [count1,setCount1]=useMemo(0);
-  const [count2,setCount2]=useMemo(0);
+  
 
-  const square=()=>{
+  const square=useMemo(()=>{
     let i = 0;
-    while(i<2000000){
+    while(i<200000000){
       i++;
     }
     return count2 * count2;
-    }
+    },[count2]);
 
 
 
@@ -55,7 +55,7 @@ function App() {
       <h1>useMemo</h1>
       <div>カウント1：{count1}</div>
       <div>カウント2：{count2}</div>
-      <div>結果：{square()}</div>
+      <div>結果：{square}</div>
       <button onClick={()=>setCount1(count1+1)}>＋</button>
       <button onClick={()=>setCount2(count2+1)}>＋</button>
     </div>
