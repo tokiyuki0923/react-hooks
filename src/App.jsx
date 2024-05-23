@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useContext, useReducer} from 'react';
+import { useState, useContext, useReducer, useMemo} from 'react';
 import Pikachu from './main';
 
 
@@ -23,6 +23,21 @@ function App() {
   const handleClick =()=>{
     setCount(count +1);
   }
+
+  const [count1,setCount1]=useMemo(0);
+  const [count2,setCount2]=useMemo(0);
+
+  const square=()=>{
+    let i = 0;
+    while(i<2000000){
+      i++;
+    }
+    return count2 * count2;
+    }
+
+
+
+
   return (
     <div className="App">
       <h1>useState</h1>
@@ -36,6 +51,13 @@ function App() {
       <p>カウント:{state}</p>
       <button onClick={()=> dispatch({type:"increment"})}>＋</button>
       <button onClick={()=> dispatch({type:"decrement"})}>ー</button>
+      <hr />
+      <h1>useMemo</h1>
+      <div>カウント1：{count1}</div>
+      <div>カウント2：{count2}</div>
+      <div>結果：{square()}</div>
+      <button onClick={()=>setCount1(count1+1)}>＋</button>
+      <button onClick={()=>setCount2(count2+1)}>＋</button>
     </div>
   )
 }
